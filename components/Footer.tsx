@@ -81,7 +81,7 @@ export default function Footer() {
                 <PhoneIcon />
                 <div>
                   <span className="text-white/60 text-xs block font-body tracking-wide">
-                    +237 6XX XXX XXX
+                    +237 683 180 957
                   </span>
                   <span className="text-white/25 text-[10px]">24/7 Available</span>
                 </div>

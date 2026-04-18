@@ -46,7 +46,7 @@ export default function CTASection() {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href={`https://wa.me/?text=${whatsappMessage}`}
+              href={`https://wa.me/237683180957?text=${whatsappMessage}`}
               target="_blank"
               rel="noopener noreferrer"
               className="btn-gold px-10 py-4 text-xs flex items-center justify-center gap-3"
@@ -55,7 +55,7 @@ export default function CTASection() {
               Book via WhatsApp
             </a>
             <a
-              href="tel:+237000000000"
+              href="tel:+237683180957"
               className="btn-outline-gold px-10 py-4 text-xs flex items-center justify-center gap-3"
             >
               <PhoneIcon />

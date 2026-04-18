@@ -8,7 +8,7 @@ export default function WhatsAppButton() {
   const message = encodeURIComponent(
     "Hello, I would like to book a transfer with Royal Drive Cameroun."
   );
-  const url = `https://wa.me/?text=${message}`;
+  const url = `https://wa.me/237683180957?text=${message}`;
 
   return (
     <>
