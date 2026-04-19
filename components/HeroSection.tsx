@@ -4,7 +4,7 @@ export default function HeroSection() {
   const whatsappMessage = encodeURIComponent(
     "Hello, I would like to book a transfer with Royal Drive Cameroun."
   );
-  const whatsappUrl = `https://wa.me/?text=${whatsappMessage}`;
+  const whatsappUrl = `https://wa.me/237683180957?text=${whatsappMessage}`;
 
   return (
     <section className="relative min-h-screen flex flex-col justify-end overflow-hidden">
