@@ -6,6 +6,7 @@ import HowItWorks from "@/components/HowItWorks";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import BookingSection from "@/components/Bookingsection";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       <WhySection />
       <HowItWorks />
       <CTASection />
+      <BookingSection />
       <Footer />
       <WhatsAppButton />
     </main>
