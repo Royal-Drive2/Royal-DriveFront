@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function HeroSection() {
   const whatsappMessage = encodeURIComponent(
-    "Hello, I would like to book a transfer with Royal Drive Cameroun."
+    "Bonjour, je souhaite réserver un transfert avec Royal Drive Cameroun."
   );
   const whatsappUrl = `https://wa.me/237683180957?text=${whatsappMessage}`;
 
@@ -10,14 +10,14 @@ export default function HeroSection() {
     <section className="relative min-h-screen flex flex-col justify-end overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
-        {/* <Image
-          src="https://images.unsplash.com/photo-1617531653332-bd46c16f4d68?w=1920&q=85"
+        <Image
+          src="/images/hero-bg.jpg"
           alt="Luxury chauffeur car on Cameroon road"
           fill
           priority
           className="object-cover object-center"
-          sizes="100vw"
-        /> */}
+          sizes="200vw"
+        />
         {/* Dark gradient overlay */}
         <div className="absolute inset-0 overlay-dark" />
         {/* Extra bottom fade */}
@@ -31,11 +31,11 @@ export default function HeroSection() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 md:px-12 lg:px-20 xl:px-28 pb-24 md:pb-32 pt-32 w-full">
+      <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 md:px-12 lg:px-20 xl:px-28 py-32 w-full flex flex-col items-center text-center">
         {/* Label */}
         <div className="flex items-center gap-4 mb-6 animate-fade-in" style={{ animationDelay: "0.2s", opacity: 0 }}>
           <div className="gold-divider" />
-          <span className="section-label">Premium Chauffeur Service</span>
+          <span className="section-label">Service de Chauffeur Premium</span>
           <div className="gold-divider" />
         </div>
 
@@ -44,10 +44,10 @@ export default function HeroSection() {
           className="section-title text-white text-shadow-gold mb-6 max-w-3xl animate-float-up"
           style={{ animationDelay: "0.4s", opacity: 0 }}
         >
-          Luxury Airport{" "}
-          <em className="text-gold-500 not-italic">Transfers</em>
+          Transferts Aéroport de{" "}
+          <em className="text-gold-500 not-italic">Luxe</em>
           <br />
-          in Cameroon
+          au Cameroun
         </h1>
 
         {/* Subtitle */}
@@ -55,9 +55,8 @@ export default function HeroSection() {
           className="font-body text-white/55 text-sm sm:text-base max-w-lg leading-relaxed mb-10 tracking-wide animate-float-up"
           style={{ animationDelay: "0.6s", opacity: 0 }}
         >
-          Experience seamless, discreet travel between Douala &amp; Yaoundé.
-          Our professional chauffeurs ensure every journey reflects the standard
-          you deserve.
+          Arrivée ou départ à Yaoundé et Douala — nous assurons votre transfert entre l'aéroport 
+          et votre hôtel ou destination avec confort, ponctualité et élégance.
         </p>
 
         {/* CTAs */}
@@ -65,17 +64,14 @@ export default function HeroSection() {
           className="flex flex-col sm:flex-row gap-4 animate-float-up"
           style={{ animationDelay: "0.8s", opacity: 0 }}
         >
-          <a href="#services" className="btn-gold px-8 py-4 text-xs text-center">
-            Book Now
+          <a href="#book" className="btn-gold px-8 py-4 text-xs text-center">
+            Réserver
           </a>
           <a
-            href={whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#services"
             className="btn-outline-gold px-8 py-4 text-xs text-center flex items-center justify-center gap-3"
           >
-            <WhatsAppIcon />
-            Contact via WhatsApp
+            Découvrir nos services
           </a>
         </div>
 
@@ -85,9 +81,9 @@ export default function HeroSection() {
           style={{ animationDelay: "1.1s", opacity: 0 }}
         >
           {[
-            { value: "24/7", label: "Availability" },
-            { value: "2", label: "Major Cities" },
-            { value: "100%", label: "Premium Fleet" },
+            { value: "24/7", label: "Disponibilité" },
+            { value: "2", label: "Grandes villes" },
+            { value: "100%", label: "Flotte Premium" },
           ].map((stat) => (
             <div key={stat.label}>
               <div
@@ -102,14 +98,6 @@ export default function HeroSection() {
             </div>
           ))}
         </div>
-      </div>
-
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 hidden md:flex flex-col items-center gap-2">
-        <span className="text-white/30 text-[9px] tracking-widest uppercase">
-          Scroll
-        </span>
-        <div className="w-px h-8 bg-gradient-to-b from-gold-500/60 to-transparent animate-pulse" />
       </div>
     </section>
   );

@@ -6,7 +6,7 @@ export default function WhatsAppButton() {
   const [hovered, setHovered] = useState(false);
 
   const message = encodeURIComponent(
-    "Hello, I would like to book a transfer with Royal Drive Cameroun."
+    "Bonjour, je souhaite réserver un transfert avec Royal Drive Cameroun."
   );
   const url = `https://wa.me/237683180957?text=${message}`;
 

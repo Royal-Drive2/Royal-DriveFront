@@ -7,6 +7,8 @@ import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import BookingSection from "@/components/Bookingsection";
+import AboutSection from "@/components/AboutSection";
+import FleetSection from "@/components/FleetSection";
 
 export default function Home() {
   return (
@@ -16,8 +18,10 @@ export default function Home() {
       <ServicesSection />
       <WhySection />
       <HowItWorks />
-      <CTASection />
+      <FleetSection />
       <BookingSection />
+      <AboutSection />
+      <CTASection />
       <Footer />
       <WhatsAppButton />
     </main>

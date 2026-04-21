@@ -5,9 +5,9 @@ const pillars = [
         <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
       </svg>
     ),
-    title: "Professional Chauffeurs",
+    title: "Chauffeurs Professionnels",
     description:
-      "Every driver is rigorously vetted, trained in executive protocol, and committed to discretion. Your privacy is paramount.",
+      "Chaque chauffeur est rigoureusement sélectionné, formé au protocole VIP et engagé à respecter votre discrétion.",
   },
   {
     icon: (
@@ -15,9 +15,9 @@ const pillars = [
         <path strokeLinecap="round" strokeLinejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
       </svg>
     ),
-    title: "Real-Time Flight Tracking",
+    title: "Suivi des transfert en Temps Réel",
     description:
-      "We monitor your flight live. Delays, early arrivals — we adjust seamlessly so you never wait and never rush.",
+      "Nous surveillons votre transfert en direct. Retard ou avance — nous nous adaptons pour que vous n'attendiez jamais.",
   },
   {
     icon: (
@@ -26,9 +26,9 @@ const pillars = [
         <path strokeLinecap="round" d="M12 6v6l4 2" />
       </svg>
     ),
-    title: "24 / 7 Availability",
+    title: "Disponible 24h/24 7j/7",
     description:
-      "Day or night, every day of the year. Whether it's a red-eye arrival or a pre-dawn departure, we are always ready.",
+      "Jour et nuit, toute l'année. Que ce soit pour une arrivée tardive ou un départ à l'aube, nous sommes toujours là.",
   },
   {
     icon: (
@@ -36,9 +36,9 @@ const pillars = [
         <path strokeLinecap="round" strokeLinejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
       </svg>
     ),
-    title: "Unmatched Luxury Experience",
+    title: "Une Expérience de Luxe Incomparable",
     description:
-      "From chilled water to seamless climate control, every detail is curated to ensure your journey is as exceptional as your destination.",
+      "De l'eau fraîche à la climatisation parfaite, chaque détail est soigné pour que votre trajet soit aussi exceptionnel que votre destination.",
   },
 ];
 
@@ -67,9 +67,9 @@ export default function WhySection() {
       <div className="relative max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16 lg:mb-20">
-          <span className="section-label block mb-4">Our Promise</span>
+          <span className="section-label block mb-4">Notre Engagement</span>
           <h2 className="section-title text-white mb-4">
-            Why Choose{" "}
+            Pourquoi Choisir{" "}
             <span className="text-gold-500 italic">Royal Drive</span>
           </h2>
           <div className="gold-divider-wide mx-auto mt-6" />
