@@ -13,6 +13,12 @@ const fleetConfort = [
     features: "Clim · WiFi · GPS",
     image: "/images/fleet/camry.jpg",
   },
+  {
+    name: "Suzuki",
+    passengers: "4 passagers",
+    features: "Clim · WiFi · GPS",
+    image: "/images/fleet/suzuki.jpg",
+  },
 ];
 
 const fleetConfortPlus = [
