@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Royal Drive Cameroun — Luxury Chauffeur Service",
+  title: "Royal Drive Cameroun — Service de Chauffeur de Luxe",
   description:
-    "Premium airport transfers and luxury chauffeur service in Cameroon. Available in Douala and Yaoundé 24/7.",
-  keywords: "chauffeur, luxury, transfer, airport, Cameroon, Douala, Yaoundé",
-  icons: { icon: "/favicon.svg" },
+    "Transferts aéroportuaires haut de gamme et service de chauffeur de luxe au Cameroun. Disponible à Douala et Yaoundé 24h/24 et 7j/7.",
+  keywords: "chauffeur, luxe, transfert, aéroport, Cameroun, Douala, Yaoundé",
+  icons: { icon: "/images/logo.png" },
 };
 
 export default function RootLayout({
@@ -15,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="fr">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link

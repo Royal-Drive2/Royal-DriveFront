@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 
-// ─── Types ────────────────────────────────────────────────────────────────────
+// Types
 type TransferType = "airport_to_dest" | "dest_to_airport" | "";
 type CityType     = "Douala" | "Yaoundé" | "";
 type PackType     = "comfort" | "comfort_plus" | "";
@@ -40,14 +40,14 @@ const INITIAL: BookingData = {
   dropoffAddress: "",
 };
 
-// ─── Shared classes (vraies classes ) ────────────────────────────
+// Shared classes (vraies classes )
 const inputCls =
   "w-full bg-obsidian-600 border border-obsidian-600 rounded-md px-4 py-3 text-white font-body text-sm focus:ring-2 focus:ring-gold-500 focus:outline-none placeholder:text-white/30";
 
 const selectCls =
   "w-full bg-obsidian-800 border border-obsidian-600 rounded-md px-4 py-3 text-white font-body text-sm focus:ring-2 focus:ring-gold-500 focus:outline-none";
 
-// ─── Icons ────────────────────────────────────────────────────────────────────
+// Icons
 function PlaneIcon({ className = "w-6 h-6" }: { className?: string }) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -81,7 +81,7 @@ function CheckIcon() {
   );
 }
 
-// ─── Step Indicator ────────────────────
+// Step Indicator
 function StepIndicator({ current, total }: { current: number; total: number }) {
   return (
     <div className="flex items-center justify-center gap-0 mb-12 overflow-x-auto pb-2">
@@ -115,7 +115,7 @@ function StepIndicator({ current, total }: { current: number; total: number }) {
 }
 
 
-// ─── Step 1 — Type de transfert ───────────────────────────────────────────────
+// Step 1 — Type de transfert
 function Step1({ data, setData, onNext }: { data: BookingData; setData: (p: Partial<BookingData>) => void; onNext: () => void }) {
   const options: { key: TransferType; label: string }[] = [
     { key: "airport_to_dest", label: "Aéroport → Destination" },
@@ -147,7 +147,7 @@ function Step1({ data, setData, onNext }: { data: BookingData; setData: (p: Part
   );
 }
 
-// ─── Step 2 — Ville ───────────────────────────────────────────────────────────
+// Step 2 — Ville
 function Step2({ data, setData, onNext }: { data: BookingData; setData: (p: Partial<BookingData>) => void; onNext: () => void }) {
   const cities: CityType[] = ["Douala", "Yaoundé"];
   return (
@@ -173,7 +173,7 @@ function Step2({ data, setData, onNext }: { data: BookingData; setData: (p: Part
   );
 }
 
-// ─── Step 3 — Date & Heure ────────────────────────────────────────────────────
+// Step - 3 Date & Heure
 function Step3({ data, setData }: { data: BookingData; setData: (p: Partial<BookingData>) => void }) {
   const today = new Date().toISOString().split("T")[0];
   return (
@@ -199,7 +199,7 @@ function Step3({ data, setData }: { data: BookingData; setData: (p: Partial<Book
   );
 }
 
-// ─── Step 4 — Passagers & Bagages ─────────────────────────────────────────────
+// Step 4 — Passagers & Bagages
 function Step4({ data, setData }: { data: BookingData; setData: (p: Partial<BookingData>) => void }) {
   return (
     <div className="space-y-6">
@@ -240,7 +240,7 @@ function Step4({ data, setData }: { data: BookingData; setData: (p: Partial<Book
   );
 }
 
-// ─── Step 5 — Choisissez votre pack ───────────────────────────────────────────
+// Step 5 — Choisissez votre pack
 function Step5({ data, setData }: { data: BookingData; setData: (p: Partial<BookingData>) => void }) {
   const packs = [
     {
@@ -296,7 +296,7 @@ function Step5({ data, setData }: { data: BookingData; setData: (p: Partial<Book
   );
 }
 
-// ─── Step 6 — Vos informations ────────────────────────────────────────────────
+// Step 6 — Vos informations
 function Step6({ data, setData }: { data: BookingData; setData: (p: Partial<BookingData>) => void }) {
   return (
     <div className="space-y-6">
@@ -349,7 +349,7 @@ function Step6({ data, setData }: { data: BookingData; setData: (p: Partial<Book
   );
 }
 
-// ─── Step 7 — Récapitulatif ───────────────────────────────────────────────────
+// Step 7 — Récapitulatif
 function Step7({ data }: { data: BookingData }) {
   const transferLabel: Record<string, string> = {
     airport_to_dest: "Aéroport → Destination",
@@ -431,7 +431,7 @@ function Step7({ data }: { data: BookingData }) {
   );
 }
 
-// ─── Main Component ───────────────────────────────────────────────────────────
+// Main Component
 export default function BookingSection() {
   const [step, setStep]    = useState(1);
   const [data, setDataRaw] = useState<BookingData>(INITIAL);
@@ -461,7 +461,7 @@ export default function BookingSection() {
   };
 
   return (
-    <section id="reserver" className="py-24 md:py-32 bg-obsidian-600">
+    <section id="book" className="py-24 md:py-32 bg-obsidian-600">
       <div className="container mx-auto px-4 max-w-3xl">
 
         {/* Header */}
