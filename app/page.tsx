@@ -22,7 +22,6 @@ export default function Home() {
       <BookingSection />
       <AboutSection />
       <CTASection />
-      <BookingSection />
       <Footer />
       <WhatsAppButton />
     </main>
