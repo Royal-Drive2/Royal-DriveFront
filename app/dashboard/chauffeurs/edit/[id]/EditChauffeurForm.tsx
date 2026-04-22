@@ -233,7 +233,7 @@ export default function EditChauffeurForm({ initialData, chauffeurId }: Props) {
     await new Promise((r) => setTimeout(r, 1200));
     setLoading(false);
     setSuccess(true);
-    setTimeout(() => router.push("/chauffeurs"), 1500);
+    setTimeout(() => router.push("/dashboard/chauffeurs"), 1500);
   };
 
   const initiales = `${form.prenom[0] ?? ""}${form.nom[0] ?? ""}`.toUpperCase() || "?";

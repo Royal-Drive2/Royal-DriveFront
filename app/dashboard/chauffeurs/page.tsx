@@ -20,29 +20,24 @@ const TrashIcon = ({ className }: { className?: string }) => (
 
 const drivers: Driver[] = [
   {
-    initiales: "PN", nom: "Paul Nkomo", telephone: "+237 690 11 22 33", status: "actif",
-    note: 0,
-    id: undefined
+    id: "1", initiales: "PN", nom: "Paul Nkomo", telephone: "+237 690 11 22 33", status: "actif",
+    note: 0
   },
   {
-    initiales: "ET", nom: "Eric Tagne", telephone: "+237 677 44 55 66", status: "actif",
-    note: 0,
-    id: undefined
+    id: "2", initiales: "ET", nom: "Eric Tagne", telephone: "+237 677 44 55 66", status: "actif",
+    note: 0
   },
   {
-    initiales: "MB", nom: "Marc Bilé", telephone: "+237 699 77 88 99", status: "inactif",
+    id: "2", initiales: "MB", nom: "Marc Bilé", telephone: "+237 699 77 88 99", status: "inactif",
     note: 0,
-    id: undefined
   },
   {
-    initiales: "JM", nom: "Joseph Mefiro", telephone: "+237 655 12 13 14", status: "inactif",
-    note: 0,
-    id: undefined
+    id: "3", initiales: "JM", nom: "Joseph Mefiro", telephone: "+237 655 12 13 14", status: "inactif",
+    note: 0
   },
   {
-    initiales: "AT", nom: "André Toko", telephone: "+237 681 22 33 44", status: "actif",
-    note: 0,
-    id: undefined
+    id: "4", initiales: "AT", nom: "André Toko", telephone: "+237 681 22 33 44", status: "actif",
+    note: 0
   },
 ];
 
