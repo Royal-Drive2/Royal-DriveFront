@@ -5,11 +5,91 @@
 @tailwind utilities;
 
 :root {
+  /* Fonts */
   --font-display: 'Cormorant Garamond', serif;
   --font-body: 'Josefin Sans', sans-serif;
+
+  /* Base colors */
+  --background: #0a0a0a;
+  --foreground: #ffffff;
+
+  /* Gold */
   --gold: #D4AF37;
   --gold-light: #e8c55a;
-  --obsidian: #0a0a0a;
+  --gold-bright: #e8c55a;
+  --gold-gradient: linear-gradient(135deg, #e8c55a 0%, #b8960c 100%);
+  --shadow-gold: 0 2px 16px rgba(212, 175, 55, 0.3);
+
+  /* Card */
+  --card: #111111;
+  --card-foreground: #ffffff;
+
+  /* Borders */
+  --border: rgba(255, 255, 255, 0.08);
+
+  /* Muted */
+  --muted: #1a1a1a;
+  --muted-foreground: rgba(255, 255, 255, 0.4);
+
+  /* Accent */
+  --accent: rgba(212, 175, 55, 0.06);
+
+  /* Primary */
+  --primary: #D4AF37;
+  --primary-foreground: #0a0a0a;
+
+  /* Sidebar */
+  --sidebar-bg: #080808;
+  --sidebar-border: rgba(255, 255, 255, 0.07);
+  --sidebar-foreground: #ffffff;
+  --sidebar-accent: rgba(212, 175, 55, 0.07);
+
+  /* Status */
+  --success: #4ade80;
+  --destructive: #f87171;
+}
+/* ─── Classes sémantiques nécessaires pour Tailwind ─────────────────────── */
+/* Ces classes permettent bg-background, text-foreground, bg-card, etc.     */
+
+@layer base {
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+  }
+}
+
+@layer utilities {
+  /* Surfaces */
+  .bg-background  { background-color: var(--background); }
+  .bg-card        { background-color: var(--card); }
+  .bg-muted       { background-color: var(--muted); }
+  .bg-accent      { background-color: var(--accent); }
+
+  /* Textes */
+  .text-foreground      { color: var(--foreground); }
+  .text-muted-foreground{ color: var(--muted-foreground); }
+  .text-primary-foreground { color: var(--primary-foreground); }
+
+  /* Bordures */
+  .border-border  { border-color: var(--border); }
+
+  /* Sidebar */
+  .bg-sidebar           { background-color: var(--sidebar-bg); }
+  .border-sidebar-border{ border-color: var(--sidebar-border); }
+  .text-sidebar-foreground { color: var(--sidebar-foreground); }
+  .bg-sidebar-accent    { background-color: var(--sidebar-accent); }
+
+  /* Gold */
+  .text-gold        { color: var(--gold); }
+  .text-gold-bright { color: var(--gold-bright); }
+  .bg-gold-gradient { background: var(--gold-gradient); }
+  .shadow-gold      { box-shadow: var(--shadow-gold); }
+
+  /* Statuts — couleurs sémantiques */
+  .text-success     { color: var(--success); }
+  .text-destructive { color: var(--destructive); }
+  .bg-success       { background-color: var(--success); }
+  .bg-destructive   { background-color: var(--destructive); }
 }
 
 * {
@@ -31,22 +111,31 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* ─── Scrollbar ─────────────────────────────── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #3a3a3a; }
+
 @layer utilities {
-  .text-gold {
-    color: #D4AF37;
+  /* ── Couleurs ── */
+  .text-gold        { color: #D4AF37; }
+  .bg-gold          { background-color: #D4AF37; }
+  .border-gold      { border-color: #D4AF37; }
+
+  /* ── Typographie ── */
+  .font-display     { font-family: var(--font-display); }
+  .font-body        { font-family: var(--font-body); }
+
+  /* ── Dégradés texte ── */
+  .text-gold-gradient {
+    background: linear-gradient(90deg, #e8c55a, #b8960c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
-  .bg-gold {
-    background-color: #D4AF37;
-  }
-  .border-gold {
-    border-color: #D4AF37;
-  }
-  .font-display {
-    font-family: var(--font-display);
-  }
-  .font-body {
-    font-family: var(--font-body);
-  }
+
+  /* ── Décorations ── */
   .gold-divider {
     width: 60px;
     height: 1px;
@@ -57,21 +146,34 @@ body {
     height: 1px;
     background: linear-gradient(90deg, transparent, #D4AF37, transparent);
   }
-  .text-shadow-gold {
-    text-shadow: 0 0 40px rgba(212, 175, 55, 0.3);
-  }
+  .text-shadow-gold { text-shadow: 0 0 40px rgba(212, 175, 55, 0.3); }
+
+  /* ── Overlays ── */
   .overlay-dark {
     background: linear-gradient(
       to bottom,
-      rgba(0, 0, 0, 0.3) 0%,
-      rgba(0, 0, 0, 0.65) 50%,
-      rgba(0, 0, 0, 0.85) 100%
+      rgba(0,0,0,0.3) 0%,
+      rgba(0,0,0,0.65) 50%,
+      rgba(0,0,0,0.85) 100%
     );
   }
+
+  /* ── Cards ── */
   .card-luxury {
     background: linear-gradient(135deg, #1a1a1a 0%, #111111 100%);
     border: 1px solid rgba(212, 175, 55, 0.15);
   }
+
+  /* ── Dashboard cards ── */
+  .card-dashboard {
+    background: linear-gradient(135deg, #1a1a1a 0%, #111111 100%);
+    border: 1px solid rgba(212, 175, 55, 0.12);
+  }
+  .card-dashboard:hover {
+    border-color: rgba(212, 175, 55, 0.35);
+  }
+
+  /* ── Boutons ── */
   .btn-gold {
     background: linear-gradient(135deg, #D4AF37 0%, #b8960c 100%);
     color: #0a0a0a;
@@ -86,6 +188,7 @@ body {
     box-shadow: 0 8px 32px rgba(212, 175, 55, 0.35);
     transform: translateY(-1px);
   }
+
   .btn-outline-gold {
     border: 1px solid #D4AF37;
     color: #D4AF37;
@@ -100,9 +203,15 @@ body {
     background: rgba(212, 175, 55, 0.1);
     box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
   }
+
+  /* ── Dashboard spécifiques ── */
+  .bg-gold-gradient  { background: linear-gradient(135deg, #e8c55a, #b8960c); }
+  .shadow-gold       { box-shadow: 0 2px 16px rgba(212, 175, 55, 0.3); }
+  .sidebar-bg        { background-color: #080808; }
 }
 
 @layer components {
+  /* ── Layout sections (landing) ── */
   .section-padding {
     @apply px-5 py-20 sm:px-8 md:px-12 lg:px-20 xl:px-28;
   }
@@ -112,7 +221,105 @@ body {
   }
   .section-label {
     font-family: var(--font-body);
-    @apply text-xs tracking-widest uppercase text-gold-500 font-light;
+    @apply text-xs tracking-widest uppercase font-light;
+    color: #D4AF37;
     letter-spacing: 0.3em;
   }
+
+  /* ── Sidebar nav ── */
+  .nav-link {
+    @apply flex items-center gap-3 px-3 py-2.5 rounded-md text-sm transition-all;
+    font-family: var(--font-body);
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    color: rgba(255,255,255,0.55);
+  }
+  .nav-link:hover {
+    background: rgba(212, 175, 55, 0.07);
+    color: rgba(255,255,255,0.9);
+  }
+  .nav-link-active {
+    background: linear-gradient(135deg, #e8c55a, #b8960c);
+    color: #0a0a0a;
+    font-weight: 500;
+    box-shadow: 0 2px 12px rgba(212, 175, 55, 0.3);
+  }
+
+  /* ── Tableaux dashboard ── */
+  .table-th {
+    @apply px-5 py-3 text-left;
+    font-family: var(--font-body);
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    font-weight: 400;
+  }
+  .table-td {
+    @apply px-5 py-4;
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 300;
+  }
+  .table-row {
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    transition: background 0.15s;
+  }
+  .table-row:hover {
+    background: rgba(212, 175, 55, 0.03);
+  }
+  .table-row:last-child {
+    border-bottom: none;
+  }
+
+  /* ── Badges ── */
+  .badge {
+    @apply inline-flex px-2.5 py-1 rounded-full border;
+    font-family: var(--font-body);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .badge-gold     { background: rgba(212,175,55,0.12); color: #D4AF37; border-color: rgba(212,175,55,0.35); }
+  .badge-success  { background: rgba(74,222,128,0.1);  color: #4ade80; border-color: rgba(74,222,128,0.25); }
+  .badge-danger   { background: rgba(248,113,113,0.1); color: #f87171; border-color: rgba(248,113,113,0.25); }
+  .badge-muted    { background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.4); border-color: rgba(255,255,255,0.1); }
+
+  /* ── Inputs ── */
+  .input-dashboard {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: #fff;
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    @apply rounded-md px-3 py-2 outline-none transition-all;
+  }
+  .input-dashboard:focus {
+    border-color: rgba(212, 175, 55, 0.45);
+    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.08);
+  }
+  .input-dashboard::placeholder {
+    color: rgba(255,255,255,0.2);
+  }
+}
+
+@layer utilities {
+  .bg-background { background-color: var(--background); }
+  .text-foreground { color: var(--foreground); }
+
+  .bg-card { background-color: var(--card); }
+  .text-muted-foreground { color: var(--muted-foreground); }
+
+  .border-border { border-color: var(--border); }
+
+  .bg-sidebar { background-color: var(--sidebar-bg); }
+  .border-sidebar-border { border-color: var(--sidebar-border); }
+
+  .bg-gold-gradient { background: var(--gold-gradient); }
+  .shadow-gold { box-shadow: var(--shadow-gold); }
+
+  .text-gold { color: var(--gold); }
 }
