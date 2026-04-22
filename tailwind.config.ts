@@ -9,13 +9,21 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        gold: {
+        gold: { DEFAULT: "var(--gold)",
+          bright: "var(--gold-bright)",
           300: "#f5d98a",
           400: "#e8c55a",
           500: "#D4AF37",
           600: "#b8960c",
           700: "#9a7a00",
         },
+          sidebar: {
+          DEFAULT: "var(--sidebar-bg)",
+          border: "var(--sidebar-border)",
+          foreground: "var(--sidebar-foreground)",
+          accent: "var(--sidebar-accent)",
+        },
+
         obsidian: {
           900: "#0a0a0a",
           800: "#111111",
@@ -23,6 +31,12 @@ const config: Config = {
           600: "#242424",
           500: "#2e2e2e",
         },
+      },
+       backgroundImage: {
+        "gold-gradient": "var(--gold-gradient)",
+      },
+      boxShadow: {
+        gold: "var(--shadow-gold)",
       },
       fontFamily: {
         display: ["var(--font-display)", "serif"],
