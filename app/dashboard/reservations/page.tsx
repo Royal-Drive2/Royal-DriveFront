@@ -30,11 +30,11 @@ const TrashIcon = ({ className }: { className?: string }) => (
 // ─── Données ──────────────────────────────────────────────────────────────────
 
 const ALL: Reservation[] = [
-  { id:"RD-1042", date:"19 Avr, 14:30", client:"Jean Mballa",  telephone:"+237 690 12 34 56", trajet:"Douala → Yaoundé",    categorie:"Confort Plus", pax:3, bagages:4, chauffeur:"Paul Nkomo",  montant:"45 000 FCFA", status:"en_cours" },
-  { id:"RD-1041", date:"19 Avr, 11:00", client:"Aline Foka",   telephone:"+237 677 88 21 09", trajet:"Yaoundé → Douala",    categorie:"Confort",      pax:2, bagages:2, chauffeur:"Eric Tagne",  montant:"35 000 FCFA", status:"terminee" },
-  { id:"RD-1040", date:"19 Avr, 09:15", client:"Samuel Eto",   telephone:"+237 699 45 67 88", trajet:"Douala → Kribi",      categorie:"Confort Plus", pax:4, bagages:6, chauffeur:"Marc Bilé",   montant:"60 000 FCFA", status:"terminee" },
-  { id:"RD-1039", date:"18 Avr, 18:45", client:"Marie Onana",  telephone:"+237 655 33 21 87", trajet:"Douala → Yaoundé",    categorie:"Confort",      pax:1, bagages:1, chauffeur:"—",           montant:"35 000 FCFA", status:"annulee"  },
-  { id:"RD-1038", date:"18 Avr, 15:20", client:"David Kana",   telephone:"+237 681 90 12 33", trajet:"Yaoundé → Bafoussam", categorie:"Confort Plus", pax:3, bagages:3, chauffeur:"Paul Nkomo",  montant:"55 000 FCFA", status:"terminee" },
+  { id:"RD-1042", date:"19 Avr, 14:30", client:"Jean Mballa",  telephone:"+237 690 12 34 56", adresse_depart:"Douala, Akwa",        adresse_arrivee:"Yaoundé, Centre",    categorie:"Confort Plus", passagers:3, bagages:4, montant:"45 000 FCFA", status:"en_cours" },
+  { id:"RD-1041", date:"19 Avr, 11:00", client:"Aline Foka",   telephone:"+237 677 88 21 09", adresse_depart:"Yaoundé, Bastos",     adresse_arrivee:"Douala, Bonanjo",    categorie:"Confort",      passagers:2, bagages:2, montant:"35 000 FCFA", status:"terminee" },
+  { id:"RD-1040", date:"19 Avr, 09:15", client:"Samuel Eto",   telephone:"+237 699 45 67 88", adresse_depart:"Douala, Bonapriso",   adresse_arrivee:"Kribi, Centre-ville",categorie:"Confort Plus", passagers:4, bagages:6, montant:"60 000 FCFA", status:"terminee" },
+  { id:"RD-1039", date:"18 Avr, 18:45", client:"Marie Onana",  telephone:"+237 655 33 21 87", adresse_depart:"Douala, Bassa",       adresse_arrivee:"Yaoundé, Mvan",      categorie:"Confort",      passagers:1, bagages:1, montant:"35 000 FCFA", status:"annulee"  },
+  { id:"RD-1038", date:"18 Avr, 15:20", client:"David Kana",   telephone:"+237 681 90 12 33", adresse_depart:"Yaoundé, Nlongkak",   adresse_arrivee:"Bafoussam, Centre",  categorie:"Confort Plus", passagers:3, bagages:3, montant:"55 000 FCFA", status:"terminee" },
 ];
 
 const TODAY_IDS = ["RD-1042", "RD-1041", "RD-1040"];
@@ -171,10 +171,10 @@ export default function ReservationsPage() {
           {/* TABLE */}
           <div className="card-dashboard rounded-xl overflow-hidden">
             <div className="overflow-x-auto w-full">
-              <table className="w-full text-sm min-w-[1200px]">
+              <table className="w-full text-sm min-w-[1300px]">
                 <thead>
                   <tr className="border-b border-white/10 text-left text-xs opacity-60">
-                    {["ID","Date","Client","Téléphone","Trajet","Catégorie","Pax","Bag.","Chauffeur","Montant","Statut","Actions"].map(h => (
+                    {["ID","Date","Client","Téléphone","Adresse de départ","Adresse d'arrivée","Catégorie","passagers","Bagages","Montant","Statut","Actions"].map(h => (
                       <th key={h} className="p-4 font-medium">{h}</th>
                     ))}
                   </tr>
@@ -190,11 +190,11 @@ export default function ReservationsPage() {
                       <td className="p-4 opacity-60 whitespace-nowrap">{r.date}</td>
                       <td className="p-4 font-medium">{r.client}</td>
                       <td className="p-4 opacity-60">{r.telephone}</td>
-                      <td className="p-4">{r.trajet}</td>
+                      <td className="p-4 opacity-80">{r.adresse_depart}</td>
+                      <td className="p-4 opacity-80">{r.adresse_arrivee}</td>
                       <td className="p-4 opacity-60">{r.categorie}</td>
-                      <td className="p-4 text-center">{r.pax}</td>
+                      <td className="p-4 text-center">{r.passagers}</td>
                       <td className="p-4 text-center">{r.bagages}</td>
-                      <td className="p-4">{r.chauffeur}</td>
                       <td className="p-4 font-medium whitespace-nowrap">{r.montant}</td>
                       <td className="p-4"><StatusBadge s={r.status} /></td>
 

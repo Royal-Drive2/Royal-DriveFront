@@ -144,7 +144,7 @@ export default function ChauffeursPage() {
                       <td className="p-4">
                         <div className="flex justify-end gap-2">
 
-                          {/* Voir */}
+                          {/* Voir 
                           <Link
                             href={`/dashboard/chauffeurs/view/${d.id}`}
                             title="Voir le chauffeur"
@@ -152,6 +152,8 @@ export default function ChauffeursPage() {
                           >
                             <EyeIcon className="h-4 w-4" />
                           </Link>
+
+                          */}
 
                           {/* Modifier */}
                          <Link

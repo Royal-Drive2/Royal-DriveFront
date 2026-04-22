@@ -50,26 +50,26 @@ const reservations: Reservation[] = [
     date: "19 Avr, 14:30",
     client: "Jean Mballa",
     telephone: "+237 690 12 34 56",
-    trajet: "Douala → Yaoundé",
     categorie: "Confort Plus",
-    pax: 3,
+    passagers: 3,
     bagages: 4,
-    chauffeur: "Paul Nkomo",
     montant: "45 000 FCFA",
     status: "en_cours",
+    adresse_depart: "Douala",
+    adresse_arrivee: "Yaoundé",
   },
   {
     id: "RD-1041",
     date: "19 Avr, 11:00",
     client: "Aline Foka",
     telephone: "+237 677 88 21 09",
-    trajet: "Yaoundé → Douala",
     categorie: "Confort",
-    pax: 2,
+    passagers: 2,
     bagages: 2,
-    chauffeur: "Eric Tagne",
     montant: "35 000 FCFA",
     status: "terminee",
+    adresse_depart: "Yaoundé",
+    adresse_arrivee: "Douala"
   },
 ];
 
@@ -205,7 +205,8 @@ export default function DashboardPage() {
                   <tr className="border-b border-white/10 text-left text-xs opacity-60">
                     <th className="p-4">ID</th>
                     <th className="p-4">Client</th>
-                    <th className="p-4">Trajet</th>
+                    <th className="p-4">Adresse de départ</th>
+                    <th className="p-4">Adresse d'arriver</th>
                     <th className="p-4">Montant</th>
                     <th className="p-4">Statut</th>
                   </tr>
@@ -218,8 +219,9 @@ export default function DashboardPage() {
                         {r.id}
                       </td>
                       <td className="p-4 font-medium">{r.client}</td>
-                      <td className="p-4 opacity-60">{r.trajet}</td>
-                      <td className="p-4 font-medium">{r.montant}</td>
+                      <td className="p-4 opacity-60">{r.adresse_depart}</td>
+                      <td className="p-4 font-medium">{r.adresse_arrivee}</td>
+                      <td className="p-4">{r.montant}</td>
                       <td className="p-4">
                         <StatusBadge status={r.status} />
                       </td>

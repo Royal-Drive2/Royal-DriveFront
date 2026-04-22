@@ -23,10 +23,16 @@ const PhoneIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
-const MapIcon = ({ className }: { className?: string }) => (
+const MapPinIcon = ({ className }: { className?: string }) => (
   <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
     <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
     <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+  </svg>
+);
+
+const MapFlagIcon = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M3 3v18M3 6l9-3 9 3-9 3-9-3z" />
   </svg>
 );
 
@@ -145,17 +151,15 @@ const SelectField = ({ label, icon: Icon, required, hasChanged, children, ...pro
 type FormData = {
   client: string;
   telephone: string;
-  depart: string;
-  arrivee: string;
+  adresse_depart: string;
+  adresse_arrivee: string;
   date: string;
   heure: string;
   categorie: string;
   pax: string;
   bagages: string;
-  chauffeur: string;
   montant: string;
   statut: "en_cours" | "terminee" | "annulee";
-  notes: string;
 };
 
 type Props = {
@@ -168,8 +172,8 @@ type Props = {
 export default function EditReservationForm({ initialData, reservationId }: Props) {
   const router = useRouter();
 
-  const [form, setForm]     = useState<FormData>(initialData);
-  const [original]          = useState<FormData>(initialData);
+  const [form, setForm]       = useState<FormData>(initialData);
+  const [original]            = useState<FormData>(initialData);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [errors, setErrors]   = useState<Partial<Record<keyof FormData, string>>>({});
@@ -177,7 +181,7 @@ export default function EditReservationForm({ initialData, reservationId }: Prop
   const changed      = (k: keyof FormData) => form[k] !== original[k];
   const hasAnyChange = (Object.keys(form) as (keyof FormData)[]).some(changed);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setForm(prev => ({ ...prev, [name]: value }));
     if (errors[name as keyof FormData]) setErrors(prev => ({ ...prev, [name]: undefined }));
@@ -185,19 +189,19 @@ export default function EditReservationForm({ initialData, reservationId }: Prop
 
   const validate = () => {
     const e: Partial<Record<keyof FormData, string>> = {};
-    if (!form.client.trim())    e.client    = "Nom du client requis";
-    if (!form.telephone.trim()) e.telephone = "Téléphone requis";
-    if (!form.depart.trim())    e.depart    = "Ville de départ requise";
-    if (!form.arrivee.trim())   e.arrivee   = "Ville d'arrivée requise";
-    if (!form.date)             e.date      = "Date requise";
-    if (!form.heure)            e.heure     = "Heure requise";
-    if (!form.categorie)        e.categorie = "Catégorie requise";
-    if (!form.montant.trim())   e.montant   = "Montant requis";
+    if (!form.client.trim())          e.client          = "Nom du client requis";
+    if (!form.telephone.trim())       e.telephone       = "Téléphone requis";
+    if (!form.adresse_depart.trim())  e.adresse_depart  = "Adresse de départ requise";
+    if (!form.adresse_arrivee.trim()) e.adresse_arrivee = "Adresse d'arrivée requise";
+    if (!form.date)                   e.date            = "Date requise";
+    if (!form.heure)                  e.heure           = "Heure requise";
+    if (!form.categorie)              e.categorie       = "Catégorie requise";
+    if (!form.montant.trim())         e.montant         = "Montant requis";
     setErrors(e);
     return Object.keys(e).length === 0;
   };
 
-  const handleReset = () => { setForm(original); setErrors({}); };
+  const handleReset  = () => { setForm(original); setErrors({}); };
 
   const handleSubmit = async () => {
     if (!validate()) return;
@@ -208,8 +212,6 @@ export default function EditReservationForm({ initialData, reservationId }: Prop
     setSuccess(true);
     setTimeout(() => router.push("/reservations"), 1500);
   };
-
-  // ── Rendu ──────────────────────────────────────────────────────────────────
 
   return (
     <div className="max-w-2xl mx-auto w-full">
@@ -260,14 +262,14 @@ export default function EditReservationForm({ initialData, reservationId }: Prop
           <SectionTitle>Trajet</SectionTitle>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <Field label="Ville de départ" icon={MapIcon} required hasChanged={changed("depart")}
-                name="depart" placeholder="Douala" value={form.depart} onChange={handleChange} />
-              {errors.depart && <p className="text-red-400 text-xs mt-1">{errors.depart}</p>}
+              <Field label="Adresse de départ" icon={MapPinIcon} required hasChanged={changed("adresse_depart")}
+                name="adresse_depart" placeholder="Ex : Douala, Akwa" value={form.adresse_depart} onChange={handleChange} />
+              {errors.adresse_depart && <p className="text-red-400 text-xs mt-1">{errors.adresse_depart}</p>}
             </div>
             <div>
-              <Field label="Ville d'arrivée" icon={MapIcon} required hasChanged={changed("arrivee")}
-                name="arrivee" placeholder="Yaoundé" value={form.arrivee} onChange={handleChange} />
-              {errors.arrivee && <p className="text-red-400 text-xs mt-1">{errors.arrivee}</p>}
+              <Field label="Adresse d'arrivée" icon={MapFlagIcon} required hasChanged={changed("adresse_arrivee")}
+                name="adresse_arrivee" placeholder="Ex : Yaoundé, Centre" value={form.adresse_arrivee} onChange={handleChange} />
+              {errors.adresse_arrivee && <p className="text-red-400 text-xs mt-1">{errors.adresse_arrivee}</p>}
             </div>
             <div>
               <Field label="Date" icon={CalendarIcon} required hasChanged={changed("date")}
@@ -298,15 +300,6 @@ export default function EditReservationForm({ initialData, reservationId }: Prop
               </SelectField>
               {errors.categorie && <p className="text-red-400 text-xs mt-1">{errors.categorie}</p>}
             </div>
-            <SelectField label="Chauffeur" icon={UserIcon} hasChanged={changed("chauffeur")}
-              name="chauffeur" value={form.chauffeur} onChange={handleChange}>
-              <option value="">Non assigné</option>
-              <option value="Paul Nkomo">Paul Nkomo</option>
-              <option value="Eric Tagne">Eric Tagne</option>
-              <option value="Marc Bilé">Marc Bilé</option>
-              <option value="Joseph Mefiro">Joseph Mefiro</option>
-              <option value="André Toko">André Toko</option>
-            </SelectField>
             <Field label="Passagers" icon={UsersIcon} hasChanged={changed("pax")}
               name="pax" type="number" min="1" max="20" value={form.pax} onChange={handleChange} />
             <Field label="Bagages" icon={BriefcaseIcon} hasChanged={changed("bagages")}
@@ -364,23 +357,6 @@ export default function EditReservationForm({ initialData, reservationId }: Prop
           </div>
         </section>
 
-        <div className="border-t border-white/[0.07]" />
-
-        {/* ── Notes ── */}
-        <section>
-          <SectionTitle>
-            Notes internes
-            {changed("notes") && <span className="ml-2"><ChangedBadge /></span>}
-          </SectionTitle>
-          <textarea name="notes" value={form.notes} onChange={handleChange} rows={3}
-            placeholder="Instructions particulières, remarques…"
-            className={`w-full bg-white/5 border rounded-lg px-4 py-3 text-sm
-                       placeholder:opacity-25 focus:outline-none focus:bg-white/[0.07]
-                       transition duration-150 resize-none
-                       ${changed("notes") ? "border-gold/40" : "border-white/10"}`}
-          />
-        </section>
-
       </div>
 
       {/* Actions */}
@@ -391,7 +367,6 @@ export default function EditReservationForm({ initialData, reservationId }: Prop
           <ResetIcon className="h-3.5 w-3.5" />
           Réinitialiser
         </button>
-
         <div className="flex gap-3">
           <button onClick={() => router.back()}
             className="px-5 py-2.5 rounded-xl border border-white/10 text-sm hover:bg-white/5 transition">

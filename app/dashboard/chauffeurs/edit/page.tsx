@@ -23,7 +23,7 @@ const PhoneIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
-const CameraIcon = ({ className, style }: { className?: string; style?: React.CSSProperties }) => (
+/* const CameraIcon = ({ className, style }: { className?: string; style?: React.CSSProperties }) => (
   <svg className={className} style={style} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
     <path strokeLinecap="round" strokeLinejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" />
     <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z" />
@@ -34,7 +34,7 @@ const TrashIcon = ({ className }: { className?: string }) => (
   <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
     <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
   </svg>
-);
+); */
 
 const CheckIcon = ({ className }: { className?: string }) => (
   <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
@@ -104,15 +104,15 @@ type FormData = {
 type Props = {
   /** Données actuelles du chauffeur — à passer depuis la page parente */
   initialData: FormData;
-  /** URL de la photo actuelle (depuis le serveur) */
-  initialPhotoUrl?: string;
+  /** URL de la photo actuelle (depuis le serveur) 
+  initialPhotoUrl?: string;*/
   /** ID du chauffeur pour l'appel API */
   chauffeurId: string;
 };
 
 // ─── Composant principal ──────────────────────────────────────────────────────
 
-export default function EditChauffeurForm({ initialData, initialPhotoUrl, chauffeurId }: Props) {
+export default function EditChauffeurForm({ initialData, chauffeurId }: Props) {
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -121,13 +121,15 @@ export default function EditChauffeurForm({ initialData, initialPhotoUrl, chauff
 
   // ── État image ──
   // imagePreview : ce qu'on affiche (nouvelle image ou photo serveur)
-  const [imagePreview, setImagePreview] = useState<string | null>(initialPhotoUrl ?? null);
+ /*  const [imagePreview, setImagePreview] = useState<string | null>(initialPhotoUrl ?? null);
   // imageFile : nouvelle image choisie par l'utilisateur (null = pas de changement)
   const [imageFile, setImageFile] = useState<File | null>(null);
   // imageRemoved : l'utilisateur a supprimé la photo existante
   const [imageRemoved, setImageRemoved] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [imageError, setImageError] = useState<string | null>(null);
+
+   */
 
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -136,13 +138,13 @@ export default function EditChauffeurForm({ initialData, initialPhotoUrl, chauff
   // ── Détection des changements ──────────────────────────────────────────────
 
   const changed = (key: keyof FormData) => form[key] !== original[key];
-  const imageChanged = imageFile !== null || (imageRemoved && !!initialPhotoUrl);
+ /*  const imageChanged = imageFile !== null || (imageRemoved && !!initialPhotoUrl); */
   const hasAnyChange =
-    (Object.keys(form) as (keyof FormData)[]).some(changed) || imageChanged;
+    (Object.keys(form) as (keyof FormData)[]).some(changed);
 
   // ── Gestion image ──────────────────────────────────────────────────────────
 
-  const processImageFile = (file: File) => {
+ /*  const processImageFile = (file: File) => {
     setImageError(null);
 
     if (!file.type.startsWith("image/")) {
@@ -186,7 +188,7 @@ export default function EditChauffeurForm({ initialData, initialPhotoUrl, chauff
     setImageRemoved(true);
     setImageError(null);
     if (fileInputRef.current) fileInputRef.current.value = "";
-  };
+  }; */
 
   // ── Formulaire ─────────────────────────────────────────────────────────────
 
@@ -209,10 +211,10 @@ export default function EditChauffeurForm({ initialData, initialPhotoUrl, chauff
 
   const handleReset = () => {
     setForm(original);
-    setImagePreview(initialPhotoUrl ?? null);
+    /* setImagePreview(initialPhotoUrl ?? null);
     setImageFile(null);
     setImageRemoved(false);
-    setImageError(null);
+    setImageError(null); */
     setErrors({});
     if (fileInputRef.current) fileInputRef.current.value = "";
   };
@@ -274,7 +276,7 @@ export default function EditChauffeurForm({ initialData, initialPhotoUrl, chauff
       {/* Carte formulaire */}
       <div className="card-dashboard rounded-2xl p-6 md:p-8 space-y-7">
 
-        {/* ── Photo de profil ── */}
+        {/* ── Photo de profil ── 
         <section>
           <SectionTitle>
             Photo de profil
@@ -290,7 +292,7 @@ export default function EditChauffeurForm({ initialData, initialPhotoUrl, chauff
 
           <div className="flex items-start gap-5">
 
-            {/* Aperçu avatar */}
+            {/* Aperçu avatar 
             <div className="relative flex-shrink-0">
              <div
              className={`h-20 w-20 rounded-full overflow-hidden ring-2 transition
@@ -309,7 +311,7 @@ export default function EditChauffeurForm({ initialData, initialPhotoUrl, chauff
                 )}
               </div>
 
-              {/* Bouton supprimer photo */}
+              {/* Bouton supprimer photo 
               {imagePreview && (
                 <button
                   onClick={removeImage}
@@ -322,7 +324,7 @@ export default function EditChauffeurForm({ initialData, initialPhotoUrl, chauff
               )}
             </div>
 
-            {/* Zone de drop / click */}
+            {/* Zone de drop / click 
             <div className="flex-1 min-w-0">
               <div
                 onClick={() => fileInputRef.current?.click()}
@@ -369,19 +371,19 @@ export default function EditChauffeurForm({ initialData, initialPhotoUrl, chauff
                 />
               </div>
 
-              {/* Erreur image */}
+              {/* Erreur image 
               {imageError && (
                 <p className="text-red-400 text-xs mt-2">{imageError}</p>
               )}
 
-              {/* Info fichier sélectionné */}
+              {/* Info fichier sélectionné 
               {imageFile && !imageError && (
                 <p className="text-xs opacity-40 mt-2 truncate">
                   ✓ {imageFile.name} · {(imageFile.size / 1024).toFixed(0)} Ko
                 </p>
-              )}
+              )}   
 
-              {/* Info suppression */}
+              {/* Info suppression 
               {imageRemoved && initialPhotoUrl && !imageFile && (
                 <p className="text-xs mt-2" style={{ color: "rgba(248,113,113,0.8)" }}>
                   La photo sera supprimée lors de la sauvegarde
@@ -390,7 +392,7 @@ export default function EditChauffeurForm({ initialData, initialPhotoUrl, chauff
             </div>
 
           </div>
-        </section>
+        </section>  */}
 
         <div className="border-t border-white/[0.07]" />
 

@@ -1,9 +1,10 @@
 "use client";
 
+import { FiLogOut } from "react-icons/fi";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  CrownIcon,
   HouseIcon,
   CarIcon,
   UsersIcon,
@@ -35,9 +36,16 @@ export default function Sidebar() {
       {/* Logo */}
       <div className="px-6 py-7 border-b border-sidebar-border">
         <Link href="/dashboard" className="flex items-center gap-3">
-          <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gold-gradient shadow-gold">
-            <CrownIcon className="h-5 w-5 text-primary-foreground" />
+
+          <span className="relative h-20 w-20">
+            <Image
+              src="/images/logo.png" // ✅ corrigé (sans /public)
+              alt="Logo"
+              fill
+              className="object-contain p-1"
+            />
           </span>
+
           <span>
             <span className="block font-display text-lg leading-tight text-gold-gradient font-semibold">
               Royal Drive
@@ -46,6 +54,7 @@ export default function Sidebar() {
               Cameroun
             </span>
           </span>
+
         </Link>
       </div>
 
@@ -69,11 +78,23 @@ export default function Sidebar() {
       </nav>
 
       {/* Footer */}
-      <div className="px-6 py-4 border-t border-sidebar-border">
-        <div className="text-xs text-muted-foreground">Connecté en tant que</div>
-        <div className="text-sm font-medium text-sidebar-foreground">Admin</div>
+     <div className="px-6 py-4 border-t border-sidebar-border space-y-3">
+      <div className="flex flex-col gap-2">
+        {/* Texte utilisateur */}
+         <div className="text-xs text-muted-foreground">
+           Connecté en tant que
+         </div>
+         <div className="text-sm font-medium text-sidebar-foreground">
+          Admin
+         </div>
+          {/* Bouton déconnexion en bas */}
+          <button className="flex items-center gap-2 text-sm text-red-500 hover:text-red-600 transition mt-2">
+            <FiLogOut className="h-4 w-4" />
+            Déconnexion
+          </button>
       </div>
+     </div>
 
-    </aside>
+    </aside>        
   );
 }

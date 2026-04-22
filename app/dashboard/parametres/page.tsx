@@ -71,12 +71,12 @@ export default function ParametresPage() {
               </div>
             </Section>
 
-            <Section title="Tarifs par défaut">
+          {/*   <Section title="Tarifs par défaut">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <Field label="Confort — Douala / Yaoundé" defaultValue="35000" type="number" />
                 <Field label="Confort Plus — Douala / Yaoundé" defaultValue="45000" type="number" />
               </div>
-            </Section>
+            </Section> */}
 
             <Section title="Profil Admin">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

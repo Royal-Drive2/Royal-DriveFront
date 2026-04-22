@@ -92,7 +92,7 @@ const VehicleCard = ({ cat }: { cat: VehicleCategory }) => (
   </div>
 );
 
-const AddCard = () => (
+/* const AddCard = () => (
   <button
     className="
       rounded-2xl flex flex-col items-center justify-center p-10 min-h-[300px]
@@ -106,7 +106,7 @@ const AddCard = () => (
       Ajouter une catégorie
     </span>
   </button>
-);
+); */
 
 // ───────────────────────────────────────────
 // PAGE
@@ -135,7 +135,7 @@ export default function VehiculesPage() {
             </p>
           </div>
 
-          <div className="flex items-center gap-2">
+         {/*  <div className="flex items-center gap-2">
             <button className="btn-outline-gold flex items-center gap-2 px-4 py-2 rounded-md text-sm">
               <PlusIcon className="h-4 w-4" /> Catégorie
             </button>
@@ -143,7 +143,7 @@ export default function VehiculesPage() {
             <button className="btn-gold flex items-center gap-2 px-4 py-2 rounded-md text-sm shadow-gold">
               <PlusIcon className="h-4 w-4" /> Véhicule
             </button>
-          </div>
+          </div> */}
         </div>
 
         {/* Grid */}
@@ -153,7 +153,7 @@ export default function VehiculesPage() {
             <VehicleCard key={cat.nom} cat={cat} />
           ))}
 
-          <AddCard />
+          {/* <AddCard /> */}
         </div>
 
       </main>

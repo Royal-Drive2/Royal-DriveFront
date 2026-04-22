@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export type NavPage =
   | "accueil"
   | "vehicules"
@@ -10,20 +12,22 @@ export type ReservationStatus = "en_cours" | "terminee" | "annulee";
 export type DriverStatus = "en_course" | "actif" | "inactif";
 
 export interface Reservation {
+  [x: string]: ReactNode;
+  adresse_depart: ReactNode;
+  adresse_arrivee: ReactNode;
   id: string;
   date: string;
   client: string;
   telephone: string;
-  trajet: string;
   categorie: string;
-  pax: number;
+  passagers: number;
   bagages: number;
-  chauffeur: string;
   montant: string;
   status: ReservationStatus;
 }
 
 export interface Driver {
+  id: any;
   initiales: string;
   nom: string;
   telephone: string;

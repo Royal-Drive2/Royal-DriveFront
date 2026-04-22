@@ -77,7 +77,6 @@ type FormData = {
   prenom: string;
   nom: string;
   telephone: string;
-  categoriePermis: string;
   statut: "actif" | "inactif";
 };
 
@@ -91,7 +90,6 @@ export default function CreateChauffeurForm() {
     prenom: "",
     nom: "",
     telephone: "",
-    categoriePermis: "",
     statut: "actif",
   });
 
@@ -107,7 +105,7 @@ export default function CreateChauffeurForm() {
 
   // ── Gestion image ──────────────────────────────────────────────────────────
 
-  const processImageFile = (file: File) => {
+ /*  const processImageFile = (file: File) => {
     setImageError(null);
 
     if (!file.type.startsWith("image/")) {
@@ -150,7 +148,7 @@ export default function CreateChauffeurForm() {
     setImageError(null);
     if (fileInputRef.current) fileInputRef.current.value = "";
   };
-
+ */
   // ── Formulaire ─────────────────────────────────────────────────────────────
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -210,13 +208,13 @@ export default function CreateChauffeurForm() {
       {/* Carte formulaire */}
       <div className="card-dashboard rounded-2xl p-6 md:p-8 space-y-7">
 
-        {/* ── Photo de profil ── */}
+        {/* ── Photo de profil ── 
         <section>
           <SectionTitle>Photo de profil</SectionTitle>
 
-          <div className="flex items-start gap-5">
+          <div className="flex items-start gap-5"> */}
 
-            {/* Aperçu avatar */}
+            {/* Aperçu avatar 
             <div className="relative flex-shrink-0">
               <div className="h-20 w-20 rounded-full overflow-hidden ring-2 ring-white/10">
                 {imagePreview ? (
@@ -231,9 +229,9 @@ export default function CreateChauffeurForm() {
                     {initiales}
                   </div>
                 )}
-              </div>
+              </div> */}
 
-              {/* Bouton supprimer */}
+              {/* Bouton supprimer 
               {imagePreview && (
                 <button
                   onClick={removeImage}
@@ -244,9 +242,9 @@ export default function CreateChauffeurForm() {
                   <TrashIcon className="h-3 w-3 text-white" />
                 </button>
               )}
-            </div>
+            </div> */}
 
-            {/* Zone de drop / click */}
+            {/* Zone de drop / click 
             <div className="flex-1 min-w-0">
               <div
                 onClick={() => fileInputRef.current?.click()}
@@ -278,9 +276,9 @@ export default function CreateChauffeurForm() {
                     {imagePreview ? "Changer la photo" : "Glissez une photo ou cliquez"}
                   </p>
                   <p className="text-xs opacity-35 mt-0.5">JPG, PNG, WEBP · max 5 Mo</p>
-                </div>
+                </div> */}
 
-                {/* Input caché */}
+                {/* Input caché 
                 <input
                   ref={fileInputRef}
                   type="file"
@@ -288,14 +286,14 @@ export default function CreateChauffeurForm() {
                   className="hidden"
                   onChange={handleFileChange}
                 />
-              </div>
+              </div>  */}
 
-              {/* Erreur image */}
+              {/* Erreur image 
               {imageError && (
                 <p className="text-red-400 text-xs mt-2">{imageError}</p>
-              )}
+              )}   */}
 
-              {/* Nom du fichier sélectionné */}
+              {/* Nom du fichier sélectionné 
               {imageFile && !imageError && (
                 <p className="text-xs opacity-40 mt-2 truncate">
                   ✓ {imageFile.name} · {(imageFile.size / 1024).toFixed(0)} Ko
@@ -304,7 +302,8 @@ export default function CreateChauffeurForm() {
             </div>
 
           </div>
-        </section>
+        </section>  
+        */}
 
         <div className="border-t border-white/[0.07]" />
 
