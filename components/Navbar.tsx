@@ -51,7 +51,7 @@ export default function Navbar() {
             <li key={link.label}>
               <a
                 href={link.href}
-                className="font-body text-xs tracking-widest uppercase text-white/60 hover:text-gold-500 transition-colors duration-300"
+                className="font-body text-xs tracking-widest uppercase text-white/60 hover:text-gold-500 duration-300 transition-opacity rounded-md px-3 py-1 hover:bg-white/5"
                 style={{ letterSpacing: "0.2em" }}
               >
                 {link.label}
@@ -61,12 +61,22 @@ export default function Navbar() {
         </ul>
 
         {/* Desktop CTA */}
-        <a
-          href="#book"
-          className="hidden md:inline-flex btn-gold px-6 py-2.5 text-xs rounded-none"
-        >
-          Réserver
-        </a>
+       {/* Desktop CTA */}
+<div className="hidden md:flex items-center gap-4">
+  <a
+    href="/dashboard"
+    className="px-5 py-2 text-xs border border-gold-500 text-gold-500 hover:bg-gold-500 hover:text-black transition-all duration-300"
+  >
+    Connexion
+  </a>
+
+  <a
+    href="#book"
+    className="btn-gold px-6 py-2.5 text-xs rounded-none"
+  >
+    Réserver
+  </a>
+</div>
 
         {/* Mobile Hamburger */}
         <button
@@ -112,14 +122,24 @@ export default function Navbar() {
             </a>
           ))}
 
-          {/* CTA */}
-          <a
-            href="#book"
-            onClick={() => setMenuOpen(false)}
-            className="btn-gold px-6 py-3 text-sm text-center mt-4"
-          >
-            Réserver
-          </a>
+         {/* CTA */}
+<div className="flex flex-col gap-3 mt-4">
+  <a
+    href="/dashboard"
+    onClick={() => setMenuOpen(false)}
+    className="border border-gold-500 text-gold-500 px-6 py-3 text-sm text-center hover:bg-gold-500 hover:text-black transition"
+  >
+    Connexion
+  </a>
+
+  <a
+    href="#book"
+    onClick={() => setMenuOpen(false)}
+    className="btn-gold px-6 py-3 text-sm text-center"
+  >
+    Réserver
+  </a>
+</div>
         </div>
       </div>
     </header>
