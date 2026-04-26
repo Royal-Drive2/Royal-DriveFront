@@ -6,14 +6,17 @@ import HowItWorks from "@/components/HowItWorks";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
-import BookingSection from "@/components/Bookingsection";
 import AboutSection from "@/components/AboutSection";
 import FleetSection from "@/components/FleetSection";
+import BookingSection from "@/components/Bookingsection";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { getLocale } from "next-intl/server";
 
-export default function Home() {
+export default async function Home() {
+  const locale = await getLocale();
   return (
-    <main className="relative bg-obsidian-900">
-      <Navbar />
+   <main className="relative bg-obsidian-900" suppressHydrationWarning>
+      <Navbar locale={locale} />
       <HeroSection />
       <ServicesSection />
       <WhySection />
@@ -23,6 +26,7 @@ export default function Home() {
       <AboutSection />
       <CTASection />
       <Footer />
+      <LanguageSwitcher />
       <WhatsAppButton />
     </main>
   );

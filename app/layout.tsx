@@ -1,22 +1,30 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale, getMessages } from "next-intl/server";
+
+export const dynamic = 'force-dynamic'; // ← CRUCIAL : relit le cookie à chaque requête
 
 export const metadata: Metadata = {
   title: "Royal Drive Cameroun — Service de Chauffeur de Luxe",
-  description:
-    "Transferts aéroportuaires haut de gamme et service de chauffeur de luxe au Cameroun. Disponible à Douala et Yaoundé 24h/24 et 7j/7.",
+  description: "Transferts aéroportuaires haut de gamme au Cameroun.",
   keywords: "chauffeur, luxe, transfert, aéroport, Cameroun, Douala, Yaoundé",
   icons: { icon: "/images/logo.png" },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
+  const locale = await getLocale();
+  const messages = await getMessages();
+
+  console.log("🌍 Locale active:", locale); // retirez après test
+
   return (
-    <html lang="fr">
+    <html lang={locale} suppressHydrationWarning>
       <head>
+        {/* Désactive Google Translate — évite l'erreur insertBefore */}
+        <meta name="google" content="notranslate" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
@@ -24,7 +32,11 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
       </head>
-      <body>{children}</body>
+      <body suppressHydrationWarning>
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          {children}
+        </NextIntlClientProvider>
+      </body>
     </html>
   );
 }

@@ -1,13 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 export default function WhatsAppButton() {
   const [hovered, setHovered] = useState(false);
+  const t = useTranslations("whatsapp");
 
-  const message = encodeURIComponent(
-    "Bonjour, je souhaite réserver un transfert avec Royal Drive Cameroun."
-  );
+  const message = encodeURIComponent(t("message"));
   const url = `https://wa.me/237683180957?text=${message}`;
 
   return (
@@ -18,6 +18,7 @@ export default function WhatsAppButton() {
           100% { transform: scale(1.75); opacity: 0; }
         }
         .wa-ping { animation: wa-ping 1.9s ease-out infinite; }
+
         @keyframes wa-pulse-shadow {
           0%, 100% { box-shadow: 0 4px 24px rgba(37,211,102,0.35), 0 0 0 0 rgba(37,211,102,0.55); }
           50%       { box-shadow: 0 4px 32px rgba(37,211,102,0.5), 0 0 0 10px rgba(37,211,102,0); }
@@ -29,12 +30,13 @@ export default function WhatsAppButton() {
         href={url}
         target="_blank"
         rel="noopener noreferrer"
+        aria-label={t("tooltip")}
+        title={t("tooltip")}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
-        aria-label="Book via WhatsApp"
-        className="fixed bottom-6 right-5 sm:bottom-8 sm:right-8 z-50 flex items-center gap-3 no-underline"
+        className="fixed bottom-6 right-5 sm:bottom-8 sm:right-8 z-50 flex items-center gap-3 no-underline group"
       >
-        {/* Tooltip */}
+        {/* Tooltip desktop */}
         <span
           className="hidden sm:block bg-gold-500 text-obsidian-900 text-[10px] font-semibold tracking-widest uppercase px-4 py-2 whitespace-nowrap transition-all duration-300"
           style={{
@@ -43,20 +45,29 @@ export default function WhatsAppButton() {
             transform: hovered ? "translateX(0)" : "translateX(8px)",
           }}
         >
-          Book Now
+          {t("tooltip")}
         </span>
 
-        {/* Circle button */}
+        {/* Tooltip mobile (toujours visible léger) */}
+        <span className="sm:hidden absolute -top-8 text-[9px] bg-black/70 text-white px-2 py-1 rounded opacity-80">
+          {t("tooltip")}
+        </span>
+
+        {/* Bouton */}
         <div
           className="wa-btn relative w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center cursor-pointer"
-          style={{ background: "linear-gradient(135deg, #25D366 0%, #128C7E 100%)" }}
+          style={{
+            background: "linear-gradient(135deg, #25D366 0%, #128C7E 100%)",
+          }}
         >
           <div className="absolute inset-1.5 rounded-full border border-white/25 pointer-events-none" />
+
           <span
             className="wa-ping absolute inset-0 rounded-full pointer-events-none"
             style={{ background: "rgba(37,211,102,0.28)" }}
           />
-          <svg
+
+         <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             className="w-7 h-7 sm:w-8 sm:h-8 fill-white relative z-10 drop-shadow"

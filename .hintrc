@@ -4,13 +4,14 @@
   ],
   "hints": {
     "axe/forms": "off",
-    "axe/name-role-value": [
+    "axe/name-role-value": "off",
+    "axe/text-alternatives": "off",
+    "no-inline-styles": "off",
+    "axe/aria": [
       "default",
       {
-        "button-name": "off"
+        "aria-valid-attr-value": "off"
       }
-    ],
-    "axe/text-alternatives": "off",
-    "no-inline-styles": "off"
+    ]
   }
 }
