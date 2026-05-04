@@ -1,5 +1,6 @@
 "use client";
 
+import { authApi } from "@/lib/auth";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -11,30 +12,25 @@ export default function ForgotPasswordPage() {
   const [success, setSuccess] = useState(false);
 
   const sendCode = async () => {
-    setError("");
-    if (!email || !email.includes("@")) {
-      setError("Entrez une adresse email valide.");
-      return;
-    }
-    setLoading(true);
-    try {
-      const res = await fetch("/api/admin/auth/forgot-password", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
-      const data = await res.json();
-      if (res.ok) {
-        setSuccess(true);
-      } else {
-        setError(data.message || "Email introuvable.");
-      }
-    } catch {
+  setError("");
+  if (!email || !email.includes("@")) {
+    setError("Entrez une adresse email valide.");
+    return;
+  }
+  setLoading(true);
+  try {
+    await authApi.forgotPassword({ email });
+    setSuccess(true);
+  } catch (err: unknown) {
+    if (err instanceof TypeError) {
       setError("Impossible de joindre le serveur.");
-    } finally {
-      setLoading(false);
+    } else {
+      setError(err instanceof Error ? err.message : "Email introuvable.");
     }
-  };
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <>

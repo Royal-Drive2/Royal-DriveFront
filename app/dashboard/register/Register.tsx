@@ -1,5 +1,6 @@
 "use client";
 
+import { authApi } from "@/lib/auth";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -12,30 +13,27 @@ export default function LoginPage() {
   const [error, setError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
-    setLoading(true);
-    try {
-     const res = await fetch("/api/admin/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({ email, password }),
-      });
-      const data = await res.json();
-      if (res.ok) {
-        const token = data.token || data.accessToken;
-        if (token) sessionStorage.setItem("rd_token", token);
-        router.push("/admin/dashboard");
-      } else {
-        setError(data.message || "Identifiants incorrects.");
-      }
-    } catch {
+  e.preventDefault();
+  setError("");
+  setLoading(true);
+  try {
+    const data = await authApi.login({ email, password });
+    const token = data.token || data.accessToken;
+    if (token) sessionStorage.setItem("rd_token", token);
+    router.push("/admin/dashboard");
+  } catch (err: unknown) {
+    // fetch() échoue = pas de réseau (TypeError)
+    if (err instanceof TypeError) {
       setError("Impossible de joindre le serveur.");
-    } finally {
-      setLoading(false);
+      return;
     }
-  };
+    // Erreur HTTP du backend — on ne peut pas distinguer email/password
+    // donc on affiche un message générique sécurisé
+    setError("Email ou mot de passe incorrect.");
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <>
