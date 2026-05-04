@@ -4,7 +4,7 @@ export const API_BASE =
 
 export function authHeaders(): HeadersInit {
   if (typeof window === "undefined") return {};
-  const token = localStorage.getItem("rd_token");
+  const token = sessionStorage.getItem("rd_token");
   return token ? { Authorization: `Bearer ${token}` } : {};
 }
 
