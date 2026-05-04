@@ -1,4 +1,4 @@
-/* import createMiddleware from 'next-intl/middleware';
+import createMiddleware from 'next-intl/middleware';
 
 export default createMiddleware({
   locales: ['fr', 'en'],
@@ -6,5 +6,8 @@ export default createMiddleware({
 });
 
 export const config = {
-  matcher: ['/((?!_next|.*\\..*).*)'],
-}; */
+  matcher: [
+    // Exclure /api/, fichiers statiques, images
+    '/((?!api|_next/static|_next/image|favicon.ico|images).*)',
+  ],
+};

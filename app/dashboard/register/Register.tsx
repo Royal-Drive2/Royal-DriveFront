@@ -1,18 +1,40 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function LoginPage() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [showPass, setShowPass] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError("");
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 1500));
-    setLoading(false);
+    try {
+     const res = await fetch("/api/admin/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        const token = data.token || data.accessToken;
+        if (token) sessionStorage.setItem("rd_token", token);
+        router.push("/admin/dashboard");
+      } else {
+        setError(data.message || "Identifiants incorrects.");
+      }
+    } catch {
+      setError("Impossible de joindre le serveur.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -98,34 +120,24 @@ export default function LoginPage() {
       <div style={{
         minHeight: "100vh",
         background: "linear-gradient(135deg, #080808 0%, #0f0f0f 50%, #080808 100%)",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: "24px",
-        fontFamily: "system-ui, sans-serif",
+        display: "flex", alignItems: "center", justifyContent: "center",
+        padding: "24px", fontFamily: "system-ui, sans-serif",
       }}>
 
-        {/* Glow background */}
         <div style={{
           position: "fixed", inset: 0, pointerEvents: "none",
           background: "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(212,175,55,0.06) 0%, transparent 70%)",
         }} />
 
-        {/* Card */}
         <div style={{
-          position: "relative",
-          width: "100%",
-          maxWidth: "420px",
+          position: "relative", width: "100%", maxWidth: "420px",
           background: "rgba(255,255,255,0.03)",
           border: "1px solid rgba(212,175,55,0.15)",
-          borderRadius: "12px",
-          padding: "48px 40px",
-          backdropFilter: "blur(12px)",
+          borderRadius: "12px", padding: "48px 40px", backdropFilter: "blur(12px)",
         }}>
           <div className="corner-tl" />
           <div className="corner-br" />
 
-          {/* Logo / Brand */}
           <div className="anim-fadeup" style={{ textAlign: "center", marginBottom: "36px" }}>
             <img src="/images/logo.png" alt="Royal Drive"
               style={{ height: "56px", width: "auto", objectFit: "contain", marginBottom: "16px" }} />
@@ -134,30 +146,34 @@ export default function LoginPage() {
             </h1>
           </div>
 
-          {/* Divider */}
           <div className="anim-fadeup anim-delay1" style={{
             height: "1px",
             background: "linear-gradient(90deg, transparent, rgba(212,175,55,0.3), transparent)",
             marginBottom: "32px",
           }} />
 
-          {/* Form */}
+          {error && (
+            <div style={{
+              background: "rgba(220,50,50,0.1)",
+              border: "1px solid rgba(220,50,50,0.3)",
+              color: "#ff8080", borderRadius: "6px",
+              padding: "12px 16px", fontSize: "12px", marginBottom: "20px",
+            }}>
+              ⚠ {error}
+            </div>
+          )}
+
           <form onSubmit={handleSubmit}>
 
-            {/* Email */}
             <div className="anim-fadeup anim-delay2" style={{ marginBottom: "16px" }}>
               <label style={{ display: "block", fontSize: "10px", letterSpacing: "0.15em", color: "rgba(212,175,55,0.6)", textTransform: "uppercase", marginBottom: "8px", fontWeight: 600 }}>
                 Email
               </label>
               <div style={{ position: "relative" }}>
                 <input
-                  type="email"
-                  required
-                  placeholder="admin@royaldrive.cm"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="input-field"
-                  style={{ paddingLeft: "44px" }}
+                  type="email" required placeholder="admin@royaldrive.cm"
+                  value={email} onChange={(e) => setEmail(e.target.value)}
+                  className="input-field" style={{ paddingLeft: "44px" }}
                 />
                 <span style={{ position: "absolute", left: "14px", top: "50%", transform: "translateY(-50%)", color: "rgba(212,175,55,0.4)" }}>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" width="18" height="18">
@@ -167,27 +183,21 @@ export default function LoginPage() {
               </div>
             </div>
 
-            {/* Password */}
             <div className="anim-fadeup anim-delay3" style={{ marginBottom: "28px" }}>
               <label style={{ display: "block", fontSize: "10px", letterSpacing: "0.15em", color: "rgba(212,175,55,0.6)", textTransform: "uppercase", marginBottom: "8px", fontWeight: 600 }}>
                 Mot de passe
               </label>
               <div style={{ position: "relative" }}>
                 <input
-                  type={showPass ? "text" : "password"}
-                  required
-                  placeholder="••••••••"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="input-field"
-                  style={{ paddingLeft: "44px", paddingRight: "44px" }}
+                  type={showPass ? "text" : "password"} required placeholder="••••••••"
+                  value={password} onChange={(e) => setPassword(e.target.value)}
+                  className="input-field" style={{ paddingLeft: "44px", paddingRight: "44px" }}
                 />
                 <span style={{ position: "absolute", left: "14px", top: "50%", transform: "translateY(-50%)", color: "rgba(212,175,55,0.4)" }}>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" width="18" height="18">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                   </svg>
                 </span>
-                {/* Toggle password */}
                 <button type="button" onClick={() => setShowPass(!showPass)}
                   style={{ position: "absolute", right: "14px", top: "50%", transform: "translateY(-50%)", background: "none", border: "none", cursor: "pointer", color: "rgba(212,175,55,0.4)", padding: 0, display: "flex" }}>
                   {showPass ? (
@@ -204,7 +214,6 @@ export default function LoginPage() {
               </div>
             </div>
 
-            {/* Submit */}
             <div className="anim-fadeup anim-delay4">
               <button type="submit" disabled={loading} className="btn-login">
                 {loading ? (
@@ -212,15 +221,22 @@ export default function LoginPage() {
                     <span className="spinner" />
                     Connexion...
                   </span>
-                ) : (
-                  "Se connecter"
-                )}
+                ) : "Se connecter"}
               </button>
             </div>
 
+            {/* Après le bouton submit */}
+            <div style={{ textAlign: "center", marginTop: "16px" }}>
+              <a href="/admin/forgot-password" style={{fontSize: "11px", color: "rgba(212,175,55,0.5)",
+                                                       textDecoration: "none", letterSpacing: "0.05em", transition: "color 0.2s" }}
+               onMouseEnter={(e) => (e.currentTarget.style.color = "rgba(212,175,55,0.9)")}
+               onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(212,175,55,0.5)")}>
+                 Mot de passe oublié ?
+             </a>
+          </div>
+
           </form>
 
-          {/* Footer */}
           <div className="anim-fadeup anim-delay4" style={{ marginTop: "28px", textAlign: "center" }}>
             <a href="/" style={{ fontSize: "11px", color: "rgba(255,255,255,0.25)", textDecoration: "none", letterSpacing: "0.05em", transition: "color 0.2s" }}
               onMouseEnter={(e) => (e.currentTarget.style.color = "rgba(212,175,55,0.6)")}
