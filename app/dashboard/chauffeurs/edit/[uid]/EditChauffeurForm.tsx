@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { driverApi } from "@/lib/drivers";
 
 // ─── Icônes ───────────────────────────────────────────────────────────────────
 
@@ -114,7 +115,7 @@ type Props = {
 
 export default function EditChauffeurForm({ initialData, chauffeurId }: Props) {
   const router = useRouter();
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  // const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [form, setForm] = useState<FormData>(initialData);
   const [original] = useState<FormData>(initialData);
@@ -216,7 +217,7 @@ export default function EditChauffeurForm({ initialData, chauffeurId }: Props) {
     setImageRemoved(false);
     setImageError(null); */
     setErrors({});
-    if (fileInputRef.current) fileInputRef.current.value = "";
+    // if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
   const handleSubmit = async () => {
@@ -230,11 +231,21 @@ export default function EditChauffeurForm({ initialData, chauffeurId }: Props) {
     // if (imageRemoved) payload.append("removePhoto", "true");
     // await fetch(`/api/chauffeurs/${chauffeurId}`, { method: "PATCH", body: payload });
 
-    await new Promise((r) => setTimeout(r, 1200));
-    setLoading(false);
+    try {
+    await driverApi.update(chauffeurId, {
+      firstName: form.prenom,
+      lastName: form.nom,
+      phoneNumber: form.telephone,
+      status: form.statut,
+    });
     setSuccess(true);
     setTimeout(() => router.push("/dashboard/chauffeurs"), 1500);
-  };
+  } catch (e: any) {
+    alert(e.message || "Erreur lors de la modification.");
+  } finally {
+    setLoading(false);
+  }
+};
 
   const initiales = `${form.prenom[0] ?? ""}${form.nom[0] ?? ""}`.toUpperCase() || "?";
 

@@ -1,0 +1,245 @@
+{
+  "nav": {
+    "services": "Services",
+    "why": "Why Us",
+    "fleet": "Fleet",
+    "book": "Book",
+    "about": "About",
+    "contact": "Contact",
+    "login": "Login"
+  },
+
+  "hero": {
+    "label": "Premium Chauffeur Service",
+    "title": "Luxury Airport",
+    "titleHighlight": "Transfers",
+    "titleSuffix": "in Cameroon",
+    "subtitle": "Arriving or departing from Yaoundé and Douala — we handle your transfer between the airport and your hotel or destination with comfort, punctuality, and elegance.",
+    "ctaBook": "Book Now",
+    "ctaServices": "Discover our services",
+    "stats": {
+      "availability": "Availability",
+      "cities": "Major cities",
+      "fleet": "Premium Fleet"
+    }
+  },
+
+  "services": {
+    "label": "Our Services",
+    "title": "Choose Your",
+    "titleHighlight": "Experience",
+    "comfort": {
+      "tier": "Comfort",
+      "tagline": "Refined Everyday Travel",
+      "description": "Travel in style aboard our premium SUV fleet. Lexus LX, Toyota Land Cruiser, and Jeep Grand Cherokee — the perfect balance between comfort and distinction.",
+      "badge": "Standard Luxury",
+      "price": "From 15,000 FCFA",
+      "cta": "Book Comfort",
+      "features": ["Air conditioning", "Free WiFi", "Professional chauffeur", "GPS tracking"]
+    },
+    "comfortPlus": {
+      "tier": "Comfort Plus",
+      "tagline": "The Pinnacle of Prestige",
+      "description": "For those who accept nothing less than extraordinary. The Mercedes-Benz S-Class and ultra-premium vehicles offer an unrivalled arrival statement.",
+      "badge": "PREMIUM",
+      "price": "From 30,000 FCFA",
+      "cta": "Book Comfort Plus",
+      "features": ["High-end vehicle", "Water & refreshments", "VIP chauffeur", "Name-sign welcome"]
+    }
+  },
+
+  "why": {
+    "label": "Our Commitment",
+    "title": "Why Choose",
+    "titleHighlight": "Royal Drive",
+    "pillars": {
+      "drivers": {
+        "title": "Professional Chauffeurs",
+        "description": "Each chauffeur is rigorously selected, trained in VIP protocol, and committed to respecting your privacy."
+      },
+      "tracking": {
+        "title": "Real-Time Transfer Tracking",
+        "description": "We monitor your transfer live. Delay or early arrival — we adapt so you never have to wait."
+      },
+      "availability": {
+        "title": "Available 24/7",
+        "description": "Day and night, all year round. Whether it's a late arrival or a dawn departure, we are always there."
+      },
+      "luxury": {
+        "title": "An Unmatched Luxury Experience",
+        "description": "From chilled water to perfect air conditioning, every detail is carefully considered so that your journey is as exceptional as your destination."
+      }
+    }
+  },
+
+  "how": {
+    "label": "The Process",
+    "title": "How It",
+    "titleHighlight": "Works",
+    "steps": {
+      "step1": {
+        "title": "Book Online",
+        "description": "Fill in the booking form in just a few clicks with your route, date, and time. We confirm within minutes."
+      },
+      "step2": {
+        "title": "Confirmation & Reminder",
+        "description": "Receive immediate confirmation by email along with a reminder 24 hours before your transfer."
+      },
+      "step3": {
+        "title": "Airport Welcome",
+        "description": "Your chauffeur awaits you at the arrivals exit with a sign bearing your name."
+      },
+      "step4": {
+        "title": "Direct Transfer",
+        "description": "Head to your hotel, apartment, or airport in complete serenity, comfort, and elegance."
+      }
+    }
+  },
+
+  "fleet": {
+    "label": "Our Vehicles",
+    "title": "Our",
+    "titleHighlight": "Fleet",
+    "passengers": "{n} passengers",
+    "comfort": "Comfort",
+    "comfortPlus": "Comfort Plus",
+    "featuresBase": "A/C · WiFi · GPS",
+    "featuresPlus": "A/C · WiFi · GPS · Water"
+  },
+
+  "booking": {
+    "title": "Book Your Transfer",
+    "subtitle": "Quick form in just a few steps.",
+    "back": "← Back",
+    "next": "Next →",
+    "confirm": "Confirm Booking",
+    "step1": {
+      "title": "Transfer Type",
+      "airportToDest": "Airport → Destination",
+      "destToAirport": "Destination → Airport"
+    },
+    "step2": {
+      "title": "City"
+    },
+    "step3": {
+      "title": "Date & Time",
+      "date": "Date",
+      "time": "Time"
+    },
+    "step4": {
+      "title": "Passengers & Luggage",
+      "passengers": "Number of passengers",
+      "luggage": "Number of bags",
+      "passenger": "{n} passenger",
+      "passengers_plural": "{n} passengers",
+      "baggage": "{n} bag",
+      "baggage_plural": "{n} bags"
+    },
+    "step5": {
+      "title": "Choose Your Pack",
+       "descComfort": "Toyota Yaris & similar vehicles",
+       "descComfortPlus": "Mercedes, Lexus, Fortuner"
+    },
+    "step6": {
+      "title": "Your Information",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "email": "Email",
+      "phone": "Phone",
+      "pickup": "Pickup address",
+      "dropoff": "Drop-off address"
+    },
+    "step7": {
+      "title": "Summary",
+      "transfer": "Transfer",
+      "city": "City",
+      "date": "Date",
+      "time": "Time",
+      "passengers": "Passengers",
+      "pack": "Pack",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "payment": "Deposit payment (30–40%)",
+      "paymentOptions": "Options: PayPal · Orange Money · MTN MoMo",
+      "paymentNote": "The balance is payable in cash or mobile money on site. Free cancellation up to 48 hours before. After this period or no-show = non-refundable deposit.",
+      "packComfort": "Comfort",
+      "packComfortPlus": "Comfort Plus"
+    },
+    "whatsapp": {
+      "header": "*Booking Royal Drive Cameroon*",
+      "transfer": "Transfer",
+      "city": "City",
+      "datetime": "Date",
+      "passengersLuggage": "Passengers | Luggage",
+      "pack": "Pack",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Tel",
+      "pickup": "Pickup",
+      "dropoff": "Drop-off"
+    }
+  },
+
+  "about": {
+    "label": "Our Story",
+    "title": "About Us",
+    "companyName": "Royal Drive Cameroon",
+    "paragraph1": "Born from a passion for excellence and Cameroonian hospitality, Royal Drive Cameroon is the benchmark for premium airport transfers in Douala and Yaoundé.",
+    "paragraph2": "Our promise is simple: to offer every traveller a royal welcome, from the moment they step off the plane to their final destination. Our professional chauffeurs, impeccably maintained vehicles, and commitment to punctuality make every journey a memorable experience.",
+    "stats": {
+      "transfers": "Transfers completed",
+      "punctuality": "Punctuality",
+      "rating": "Client rating"
+    }
+  },
+
+  "contact": {
+    "label": "Get in touch",
+    "title": "Contact Us",
+    "subtitle": "A question or special request? Our team is here for you.",
+    "form": {
+      "name": "Full name",
+      "namePlaceholder": "John Doe",
+      "email": "Email",
+      "emailPlaceholder": "your@email.com",
+      "message": "Message",
+      "messagePlaceholder": "Describe your needs...",
+      "send": "Send message"
+    },
+    "info": {
+      "phone": "Phone",
+      "email": "Email",
+      "address": "Addresses",
+      "addressValue": "Douala, Cameroon\nYaoundé, Cameroon"
+    }
+  },
+
+  "footer": {
+    "tagline": "Premium private airport transfer service in Cameroon. Precision, discretion, and elegance on every journey.",
+    "cities": "Cities",
+    "services": "Our services",
+    "contact": "Contact",
+    "available": "Available 24/7",
+    "whatsapp": "Contact on WhatsApp",
+    "rights": "All rights reserved.",
+    "motto": "Luxury · Precision · Discretion",
+    "servicesList": [
+      "Airport transfers",
+      "Business travel",
+      "Intercity trips",
+      "VIP escort",
+      "Event transport"
+    ],
+    "citiesList": [
+      { "name": "Douala", "detail": "Douala International Airport (DLA)" },
+      { "name": "Yaoundé", "detail": "Yaoundé Nsimalen Airport (NSI)" }
+    ],
+    "whatsappMessage": "Hello, I would like to book a transfer with Royal Drive Cameroon."
+  },
+
+  "whatsapp": {
+    "tooltip": "Book Now",
+    "message": "Hello, I would like to book a transfer with Royal Drive Cameroon."
+  }
+}
