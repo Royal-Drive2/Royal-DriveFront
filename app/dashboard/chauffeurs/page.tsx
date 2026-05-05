@@ -32,10 +32,81 @@ const StatusBadge = ({ status }: { status: string }) => {
   );
 };
 
+// ─── Modale suppression ───────────────────────────────────────────────────────
+
+function DeleteModal({
+  nom,
+  onConfirm,
+  onCancel,
+  loading,
+}: {
+  nom: string;
+  onConfirm: () => void;
+  onCancel: () => void;
+  loading: boolean;
+}) {
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      style={{ background: "rgba(0,0,0,0.6)", backdropFilter: "blur(6px)" }}
+    >
+      <div
+        className="card-dashboard rounded-2xl p-6 max-w-sm w-full shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Icône */}
+        <div
+          className="h-12 w-12 rounded-full flex items-center justify-center mb-4 mx-auto"
+          style={{ background: "rgba(239,68,68,0.15)", border: "1px solid rgba(239,68,68,0.3)" }}
+        >
+          <TrashIcon className="h-5 w-5 text-red-400" />
+        </div>
+
+        <h3 className="text-lg font-semibold text-center mb-1">
+          Supprimer ce chauffeur ?
+        </h3>
+        <p className="text-sm opacity-50 text-center mb-6">
+          Le chauffeur{" "}
+          <span className="font-semibold opacity-100" style={{ color: "#D4AF37" }}>
+            {nom}
+          </span>{" "}
+          sera définitivement supprimé.
+        </p>
+
+        <div className="flex gap-3">
+          <button
+            onClick={onCancel}
+            disabled={loading}
+            className="flex-1 px-4 py-2.5 rounded-xl border border-white/10 text-sm hover:bg-white/5 transition disabled:opacity-40"
+          >
+            Annuler
+          </button>
+          <button
+            onClick={onConfirm}
+            disabled={loading}
+            className="flex-1 px-4 py-2.5 rounded-xl text-sm font-medium transition flex items-center justify-center gap-2 disabled:opacity-70"
+            style={{ background: "rgba(239,68,68,0.85)", color: "#fff" }}
+          >
+            {loading && (
+              <span className="h-4 w-4 rounded-full border-2 border-white/30 border-t-white animate-spin" />
+            )}
+            {loading ? "Suppression..." : "Supprimer"}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Page principale ──────────────────────────────────────────────────────────
+
 export default function ChauffeursPage() {
   const [drivers, setDrivers] = useState<Driver[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
+  // Modale
+  const [deleteTarget, setDeleteTarget] = useState<{ id: string; nom: string } | null>(null);
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
   const fetchDrivers = async () => {
@@ -43,10 +114,10 @@ export default function ChauffeursPage() {
     setError("");
     try {
       const data = await driverApi.getAll();
-       console.log("Données complètes:", JSON.stringify(data[0], null, 2));
+      console.log("Données complètes:", JSON.stringify(data[0], null, 2));
       setDrivers(data);
-    } catch (e: any) {
-      setError(e.message || "Impossible de charger les chauffeurs.");
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message : "Impossible de charger les chauffeurs.");
     } finally {
       setLoading(false);
     }
@@ -54,14 +125,15 @@ export default function ChauffeursPage() {
 
   useEffect(() => { fetchDrivers(); }, []);
 
-  const handleDelete = async (id: string, nom: string) => {
-    if (!confirm(`Supprimer ${nom} ?`)) return;
-    setDeletingId(id);
+  const handleDeleteConfirm = async () => {
+    if (!deleteTarget) return;
+    setDeletingId(deleteTarget.id);
     try {
-      await driverApi.delete(id);
-      setDrivers((prev) => prev.filter((d) => d.uid !== id));
-    } catch (e: any) {
-      alert(e.message || "Erreur lors de la suppression.");
+      await driverApi.delete(deleteTarget.id);
+      setDrivers((prev) => prev.filter((d) => d.uid !== deleteTarget.id));
+      setDeleteTarget(null);
+    } catch (e: unknown) {
+      alert(e instanceof Error ? e.message : "Erreur lors de la suppression.");
     } finally {
       setDeletingId(null);
     }
@@ -70,9 +142,21 @@ export default function ChauffeursPage() {
   return (
     <div className="flex min-h-screen w-full bg-background text-foreground">
       <Sidebar />
+
+      {/* Modale suppression */}
+      {deleteTarget && (
+        <DeleteModal
+          nom={deleteTarget.nom}
+          onConfirm={handleDeleteConfirm}
+          onCancel={() => setDeleteTarget(null)}
+          loading={deletingId === deleteTarget.id}
+        />
+      )}
+
       <main className="flex-1 md:ml-64">
         <div className="p-6 md:p-10 max-w-7xl mx-auto">
 
+          {/* HEADER */}
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
             <div>
               <h1 className="text-3xl font-semibold">Chauffeurs</h1>
@@ -80,18 +164,24 @@ export default function ChauffeursPage() {
                 {drivers.length} chauffeur{drivers.length > 1 ? "s" : ""} enregistré{drivers.length > 1 ? "s" : ""}
               </p>
             </div>
-            <Link href="/dashboard/chauffeurs/new" className="btn-gold flex items-center gap-2 px-4 py-2 rounded-md text-sm shadow-gold">
+            <Link
+              href="/dashboard/chauffeurs/new"
+              className="btn-gold flex items-center gap-2 px-4 py-2 rounded-md text-sm shadow-gold"
+            >
               <PlusIcon className="h-4 w-4" />
               Nouveau chauffeur
             </Link>
           </div>
 
+          {/* ERREUR */}
           {error && (
-            <div className="mb-6 p-4 rounded-xl text-sm" style={{ background: "rgba(220,50,50,0.1)", border: "1px solid rgba(220,50,50,0.3)", color: "#ff8080" }}>
+            <div className="mb-6 p-4 rounded-xl text-sm"
+              style={{ background: "rgba(220,50,50,0.1)", border: "1px solid rgba(220,50,50,0.3)", color: "#ff8080" }}>
               ⚠ {error}
             </div>
           )}
 
+          {/* TABLE */}
           <div className="card-dashboard rounded-xl overflow-hidden">
             {loading ? (
               <div className="flex items-center justify-center py-20 opacity-40">
@@ -101,7 +191,8 @@ export default function ChauffeursPage() {
             ) : drivers.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-20 opacity-30">
                 <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-12 w-12 mb-3">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1}
+                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
                 <p className="text-sm">Aucun chauffeur enregistré</p>
               </div>
@@ -133,17 +224,17 @@ export default function ChauffeursPage() {
                           <td className="p-4"><StatusBadge status={d.status} /></td>
                           <td className="p-4">
                             <div className="flex justify-end gap-2">
-                              <Link href={`/dashboard/chauffeurs/edit/${d.uid}`}
-                                className="p-2 rounded-md hover:bg-blue-500/10 text-blue-400 hover:text-blue-300 transition opacity-70 hover:opacity-100">
+                              <Link
+                                href={`/dashboard/chauffeurs/edit/${d.uid}`}
+                                className="p-2 rounded-md hover:bg-blue-500/10 text-blue-400 hover:text-blue-300 transition opacity-70 hover:opacity-100"
+                              >
                                 <PencilIcon className="h-4 w-4" />
                               </Link>
                               <button
-                                onClick={() => handleDelete(d.uid, `${d.firstName} ${d.lastName}`)}
-                                disabled={deletingId === d.uid}
-                                className="p-2 rounded-md hover:bg-red-500/10 text-red-400 hover:text-red-300 transition disabled:opacity-40">
-                                {deletingId === d.uid
-                                  ? <span className="h-4 w-4 rounded-full border-2 border-current border-t-transparent animate-spin block" />
-                                  : <TrashIcon className="h-4 w-4" />}
+                                onClick={() => setDeleteTarget({ id: d.uid, nom: `${d.firstName} ${d.lastName}` })}
+                                className="p-2 rounded-md hover:bg-red-500/10 text-red-400 hover:text-red-300 transition"
+                              >
+                                <TrashIcon className="h-4 w-4" />
                               </button>
                             </div>
                           </td>

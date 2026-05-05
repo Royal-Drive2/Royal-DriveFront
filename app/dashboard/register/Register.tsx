@@ -12,28 +12,36 @@ export default function LoginPage() {
   const [showPass, setShowPass] = useState(false);
   const [error, setError] = useState("");
 
-  const handleSubmit = async (e: React.FormEvent) => {
+ const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
   setError("");
   setLoading(true);
   try {
     const data = await authApi.login({ email, password });
-    const token = data.token || data.accessToken;
-    if (token) sessionStorage.setItem("rd_token", token);
-    router.push("/admin/dashboard");
+    
+    const token = data.token || data.accessToken || data.idToken; 
+    
+    if (!token) {
+      // Le backend a répondu 200 mais sans token — affiche ce qu'il a renvoyé
+      setError("Erreur serveur : token manquant dans la réponse.");
+      console.error("Réponse sans token:", data);
+      return;
+    }
+    
+    sessionStorage.setItem("rd_token", token);
+    router.push("/dashboard");
+    
   } catch (err: unknown) {
-    // fetch() échoue = pas de réseau (TypeError)
     if (err instanceof TypeError) {
       setError("Impossible de joindre le serveur.");
       return;
     }
-    // Erreur HTTP du backend — on ne peut pas distinguer email/password
-    // donc on affiche un message générique sécurisé
     setError("Email ou mot de passe incorrect.");
   } finally {
     setLoading(false);
   }
 };
+
 
   return (
     <>

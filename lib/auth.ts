@@ -10,6 +10,14 @@ export interface LoginPayload {
 export interface LoginResponse {
   token?: string;
   accessToken?: string;
+  idToken?: string;  
+  admin?: {
+    uid: string;
+    email: string;
+    displayName: string;
+    phoneNumber: string;
+    isSuperAdmin: boolean;
+  };
 }
 
 export interface ForgotPasswordPayload {
@@ -69,11 +77,28 @@ export const authApi = {
 
   // GET /api/admin/profil
   getProfile: () =>
-    apiFetch<AdminProfile>("/api/admin/profil"),
+    apiFetch<AdminProfile>("/api/admin/profile"),
 
   // PUT /api/admin/profil
   updateProfile: (data: UpdateProfilePayload) =>
-    apiFetch<void>("/api/admin/profil", {
+    apiFetch<void>("/api/admin/profile", {
+      method: "PUT",
+      body: JSON.stringify(data),
+    }),
+    
+};
+
+export interface CompanyInfo {
+  name: string;
+  email: string;
+  phoneNumber: string;
+  city: string;
+}
+
+export const companyApi = {
+  get: () => apiFetch<CompanyInfo>("/api/admin/company"),
+  update: (data: CompanyInfo) =>
+    apiFetch<void>("/api/admin/company", {
       method: "PUT",
       body: JSON.stringify(data),
     }),
