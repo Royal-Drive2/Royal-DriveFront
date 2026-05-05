@@ -2,6 +2,7 @@
 
 import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
+import { driverApi } from "@/lib/drivers";
 
 // ─── Icônes ───────────────────────────────────────────────────────────────────
 
@@ -178,12 +179,20 @@ export default function CreateChauffeurForm() {
     // if (imageFile) payload.append("photo", imageFile);
     // await fetch("/api/chauffeurs", { method: "POST", body: payload });
 
-    await new Promise((r) => setTimeout(r, 1200));
-    setLoading(false);
+    try {
+    await driverApi.create({
+      firstName: form.prenom,
+      lastName: form.nom,
+      phoneNumber: form.telephone,
+    });
     setSuccess(true);
     setTimeout(() => router.push("/dashboard/chauffeurs"), 1500);
-  };
-
+  } catch (e: any) {
+    alert(e.message || "Erreur lors de la création.");
+  } finally {
+    setLoading(false);
+  }
+};
   const initiales = `${form.prenom[0] ?? ""}${form.nom[0] ?? ""}`.toUpperCase() || "?";
 
   // ── Rendu ──────────────────────────────────────────────────────────────────
